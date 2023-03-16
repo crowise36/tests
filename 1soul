@@ -1,0 +1,527 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>[##_title_##]</title>
+		<link href="./style.css" rel="stylesheet" type="text/css">
+		<link rel="alternate" type="application/rss+xml" title="[##_title_##]" href="[##_rss_url_##]"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<!--[if lt IE 9]-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!--[endif]-->
+
+		<!-- 첫화면 -->
+				<script>
+	if (( window.location.pathname == '/' )) {
+    document.write( '' );
+  } 
+			else {
+    document.write( '<style>#information,#info_mobile{display:none !important;}</style>' );
+  }
+		</script>
+
+	</head>
+
+	<body id="[##_body_id_##]">
+		<s_t3>
+		
+				<!-- 음악 플레이어 --> 
+	
+<audio id="myAudio" ontimeupdate="onTimeUpdate()">
+  <!-- <source src="audio.ogg" type="audio/ogg"> -->
+  <source id="source-audio" src="" type="audio/mpeg">
+</audio>
+
+<div class="player-ctn">
+  <div class="infos-ctn">
+    <div class="musictitle"></div>
+  </div>
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
+  <div class="btn-ctn">
+     <div class="btn-action" onclick="toggleAudio()">
+        <div id="btn-faws-play-pause">
+          <i class='fa fa-play' id="icon-play"></i>
+          <i class='fa fa-pause' id="icon-pause" style="display: none"></i>
+        </div>
+     </div>
+     <div class="btn-action first-btn" onclick="previous()">
+        <div id="btn-faws-back">
+          <i class='fa fa-step-backward'></i>
+        </div>
+     </div>
+     <div class="btn-action" onclick="next()">
+        <div id="btn-faws-next">
+          <i class='fa fa-step-forward'></i>
+        </div>
+     </div>
+     <div class="btn-mute" id="toggleMute" onclick="toggleMute()">
+        <div id="btn-faws-volume">
+          <i id="icon-vol-up" class='fa fa-volume-up'></i>
+          <i id="icon-vol-mute" class='fa fa-volume-mute' style="display: none"></i>
+        </div>
+     </div>
+  </div>
+  <div class="playlist-ctn"></div>
+</div>
+			<div id="container">
+				<div id="header">
+				<div class="title"><a href="[##_blog_link_##]"><img src="./images/logo.jpg"/ style="max-width:100%; height:auto"></a></div>
+					<div onclick="history.back();" class="page_cover"> </div>
+					<div onclick="history.back();" class="page_cover"> </div>
+					<div class="btn"></div>
+					<div class="catebox">
+						<div class="scroll">
+							<ul>
+								<li class="cate"><a href="/notice">Notice</a></li>
+								[##_category_list_##]
+								<div class="etc"> <span>more</span>
+									<div class="etcbox">
+										<s_search>
+											<li class="search">
+												<input type="text" name="[##_search_name_##]" value="[##_search_text_##]" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }" class="search_input" placeholder="Search"/>
+												<input class="submit" value="&#xf002" type="button" onclick="[##_search_onclick_submit_##]" />
+											</li>
+										</s_search>
+										<li class="cate"><a href="[##_guestbook_link_##]">guest</a> </li>
+										<li class="cate"><a href="[##_owner_url_##]/entry/post">write</a> </li>
+										<li class="cate"><a href="[##_owner_url_##]">admin</a> </li>
+									</div>
+								</div>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- header -->
+					<div id="information">
+					<div class="info">
+<p>프롬 온리전 ― 《미.연.시》는 FROM SOFTWARE에서 제작한 게임을 주제로 한 <b>비공식 행사</b>입니다.</p>
+<p>본 행사는 2차 창작물의 판매 및 교류, 이벤트 진행을 목적으로 하며</p>
+<p>프롬 소프트웨어, 반다이 남코 등 <b>공식 제작사 및 배급사와 무관한 비영리성 팬 이벤트</b>입니다.</p>
+<p>동인 및 2차 창작 문화에 대해 충분히 숙지한 분들의 참가를 지향합니다.</p>
+</br>
+<p><b><font size="3em">행사 일자</font></b>&nbsp;&nbsp;&nbsp;&nbsp;2023년 12월 중 (추후 공개)</p>
+</br>
+<p><b><font size="3em">행사 장소</font></b>&nbsp;&nbsp;&nbsp;&nbsp;서울권 (추후 공개)</p>
+</br>
+<p><b><font size="3em">연령 제한</font></b>&nbsp;&nbsp;&nbsp;&nbsp;2023년 1월 1일 기준 만 19세 이상 성인 (04년생 이상)</p>
+</div>
+</div>
+<div id="info_mobile">
+<a href=#none id="show" onclick="if(hide.style.display=='none') {hide.style.display='';} else {hide.style.display='none';}"><b><font size="3em">【행사 개요】</font></b></a>
+<div id="hide" style="display: none">
+</br>
+<p>프롬 온리전 《미.연.시》는 FROM SOFTWARE에서 제작한 게임을 주제로 한 <b>비공식 행사</b>입니다.</p>
+<p>본 행사는 2차 창작물의 판매 및 교류, 이벤트 진행을 목적으로 하며</p>
+<p>프롬 소프트웨어, 반다이 남코 등 <b>공식 제작사 및 배급사와 무관한 비영리성 팬 이벤트</b>입니다.</p>
+<p>동인 및 2차 창작 문화에 대해 충분히 숙지한 분들의 참가를 지향합니다.</p>
+</br>
+<p><b><font size="3em">행사 일자</font></b>&nbsp;&nbsp;&nbsp;&nbsp;2023년 12월 중 (추후 공개)</p>
+</br>
+<p><b><font size="3em">행사 장소</font></b>&nbsp;&nbsp;&nbsp;&nbsp;서울권 (추후 공개)</p>
+</br>
+<p><b><font size="3em">연령 제한</font></b>&nbsp;&nbsp;&nbsp;&nbsp;2023년 1월 1일 기준 만 19세 이상 성인 (04년생 이상)</p>
+</div>
+</div>
+				<div id="content">
+					<div class="list_wrap" id="lst_gal">
+						<s_article_rep>
+							<div id="mArticle" class="article_skin">
+								<s_index_article_rep>
+									<div class="thumb"> <a href="[##_article_rep_link_##]" class="thumb-link">
+										<s_article_rep_thumbnail> <span class="thumb-img"> <img src="//i1.daumcdn.net/thumb/C200x200/?fname=[##_article_rep_thumbnail_raw_url_##]"></span> </s_article_rep_thumbnail>
+										<div class="info">
+											<li class="title">[##_article_rep_title_##]</li>
+											<li class="date">[##_article_rep_simple_date_##]</li>
+										</div>
+										</a> </div>
+								</s_index_article_rep>
+								<s_permalink_article_rep>
+									<div class="entry">
+										<div class="titleWrap">
+											<li class="title"><a href="[##_article_rep_link_##]">[##_article_rep_title_##]</a></li>
+											<li class="date">[##_article_rep_date_##]</li>
+											<s_ad_div>
+												<li class="admin"> <a href="[##_s_ad_m_link_##]"><i class="fa fa-pencil" aria-hidden="true"></i></a> <a href="#" onclick="[##_s_ad_d_onclick_##]"><i class="fa fa-eraser" aria-hidden="true"></i></a> </li>
+											</s_ad_div>
+										</div>
+										<div class="article"> [##_article_rep_desc_##] </div>
+										<s_tag_label>
+											<div class="tagTrail">
+												<div class="tag">TAG</div>
+												[##_tag_label_rep_##]</div>
+										</s_tag_label>
+										<div class="actionTrail">
+											<div class="cnt">COMMENT</div>
+											<a href="#rp" onclick="[##_article_rep_rp_link_##]">
+												<s_rp_count>[##_article_rep_rp_cnt_##]</s_rp_count>
+											</a> </div>
+										<s_rp>
+											<div class="comment">
+												<s_rp_input_form>
+													<div class="cmt-write">
+														<p>
+															<textarea name="[##_rp_input_comment_##]" rows="10" cols="20"></textarea>
+														</p>
+														<p class="submit">
+															<input type="submit" value="&#xf003" onclick="[##_rp_onclick_submit_##]" />
+														</p>
+														<s_rp_member>
+															<s_rp_guest>
+																<p class="info">
+																	<input type="text" name="[##_rp_input_name_##]" value="[##_guest_name_##]" placeholder="name" />
+																	<input type="password" maxlength="8" name="[##_rp_input_password_##]" value="[##_rp_input_password_##]" placeholder="password" />
+																	<input type="text" class="homepage" name="[##_rp_input_homepage_##]" value="[##_guest_homepage_##]" />
+																</p>
+															</s_rp_guest>
+															<p class="secret">
+																<input type="checkbox" id="secret" name="[##_rp_input_is_secret_##]" class="checkbox" value="1"  />
+																<label for="secret" class="secret-label"></label>
+															</p>
+														</s_rp_member>
+													</div>
+												</s_rp_input_form>
+												<div class="commentList">
+													<s_rp_container>
+														<ol>
+															<s_rp_rep>
+																<li id='[##_rp_rep_id_##]' class="cmt-list">
+																	<div class="cmt [##_rp_rep_class_##]"> <img src="./images/profile.jpg">
+																		<div class="info"><span class="name">[##_rp_rep_name_##]</span>
+																			<p class="text">[##_rp_rep_desc_##]</p>
+																			<span class="date"> [##_rp_rep_date_##]</span> <span class="control"> <a href="#" onclick="[##_rp_rep_onclick_delete_##]" class="modify">edit/del</a> <a href="#" onclick="[##_rp_rep_onclick_reply_##]" class="write">reply</a> </span> </div>
+																	</div>
+																	<s_rp2_container>
+																		<ul>
+																			<s_rp2_rep>
+																				<li class="reply" id='[##_rp_rep_id_##]'> <img src="./images/profile.jpg">
+																					<div class="info [##_rp_rep_class_##]"><span class="name">[##_rp_rep_name_##]</span>
+																						<p class="text">[##_rp_rep_desc_##]</p>
+																						<span class="date"> [##_rp_rep_date_##]</span> <span class="control"><a href="#" onclick="[##_rp_rep_onclick_delete_##]" class="modify">edit/del</a> </span> </div>
+																				</li>
+																			</s_rp2_rep>
+																		</ul>
+																	</s_rp2_container>
+																</li>
+															</s_rp_rep>
+														</ol>
+													</s_rp_container>
+												</div>
+											</div>
+										</s_rp>
+									</div>
+								</s_permalink_article_rep>
+							</div>
+						</s_article_rep>
+					</div>
+					<s_guest>
+						<div class="guestbook">
+							<s_guest_input_form>
+								<div class="guestWrite">
+									<p>
+										<textarea name="[##_guest_textarea_body_##]" cols="20" rows="10"></textarea>
+									</p>
+									<p class="submit">
+										<input type="submit" value="&#xf003" onclick="[##_guest_onclick_submit_##]"/>
+									</p>
+									<s_guest_member>
+										<s_guest_form>
+											<p class="info">
+												<input type="text" name="[##_guest_input_name_##]" value="[##_guest_name_##]" placeholder="name" />
+												<input type="password" maxlength="8" name="[##_guest_input_password_##]" value="[##_guest_password_##]" placeholder="password" />
+												<input type="text" name="[##_guest_input_homepage_##]" value="[##_guest_homepage_##]" />
+											</p>
+										</s_guest_form>
+										<p class="secret">
+											<input type="checkbox" id="[##_guest_input_is_secret_##]" name="[##_guest_input_is_secret_##]" class="checkbox" value="1"  />
+											<label for="[##_guest_input_is_secret_##]" class="secret-label"></label>
+										</p>
+									</s_guest_member>
+								</div>
+							</s_guest_input_form>
+							<s_guest_container>
+								<div class="guestList">
+									<ol>
+										<s_guest_rep>
+											<li id='[##_guest_rep_id_##]' class="guest-list">
+												<div class="guest [##_guest_rep_class_##]"> <img src="./images/profile.jpg">
+													<div class="info"><span class="name">[##_guest_rep_name_##]</span>
+														<p class="text">[##_guest_rep_desc_##]</p>
+														<span class="date"> [##_guest_rep_date_##]</span> <span class="control"><a href="#" onclick="[##_guest_rep_onclick_delete_##]">edit/del</a> <a href="#" onclick="[##_guest_rep_onclick_reply_##]" class="write">reply</a> </span> </div>
+												</div>
+												<s_guest_reply_container>
+													<ul>
+														<s_guest_reply_rep>
+															<li class="reply" id='[##_guest_rep_id_##]'> <img src="./images/profile.jpg">
+																<div class="info  [##_guest_rep_class_##]"> <span class="name">[##_guest_rep_name_##]</span>
+																	<p class="text">[##_guest_rep_desc_##]</p>
+																	<span class="date"> [##_guest_rep_date_##]</span><span class="control"> <a href="#" onclick="[##_guest_rep_onclick_delete_##]">edit/del</a> </span> </div>
+															</li>
+														</s_guest_reply_rep>
+													</ul>
+												</s_guest_reply_container>
+											</li>
+										</s_guest_rep>
+									</ol>
+								</div>
+							</s_guest_container>
+						</div>
+					</s_guest>
+					<s_article_protected>
+						<s_index_article_rep>
+							<div class="thumb secretlist"> <a href="[##_article_rep_link_##]">
+								<s_article_rep_thumbnail> <span class="thumb-img"> <img src="//i1.daumcdn.net/thumb/C200x200/?fname=./images/secret.jpg"></span></s_article_rep_thumbnail>
+								<div class="info"><span class="title">[##_article_rep_title_##] <i class="fa fa-lock" aria-hidden="true"></i></span><span class="date">[##_article_rep_simple_date_##]</span></div>
+								</a></div>
+						</s_index_article_rep>
+						<s_permalink_article_rep>
+							<div class="entryProtected">
+								<p>
+									<input class="post-secret" required type="password" maxlength="16" id="[##_article_password_##]" name="[##_article_password_##]" value="" onkeydown="if (event.keyCode == 13)[##_article_dissolve_##]" />
+									<label for="[##_article_password_##]" placeholder="password"></label>
+									<input type="button" class="post-submit" value="enter" onclick="[##_article_dissolve_##]" />
+								</p>
+							</div>
+						</s_permalink_article_rep>
+					</s_article_protected>
+					<s_notice_rep>
+						<div class="entryNotice">[##_notice_rep_desc_##]</div>
+					</s_notice_rep>
+				</div>
+				<!-- content -->
+				<div id="footer">
+					<s_paging>
+						<div class="paging"><a [##_prev_page_##] class="no-more-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+							<s_paging_rep><a [##_paging_rep_link_##] class="num">[##_paging_rep_link_num_##]</a></s_paging_rep>
+							<a [##_next_page_##] class="no-more-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></a> </div>
+					</s_paging>
+					<div class="top"><a href="#top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a></div>
+					<!-- 카피라이트 삭제 금지 -->
+					<div class="copy"><a href="http://sweet-myo.tistory.com" target="_blank" title="묘연 티스토리 스킨">🅼</a></div>
+				</div>
+				<!-- footer --> 
+			</div>
+			<!-- container --> 
+			<!--음악플레이어스크립트-->
+<script>
+// Get the necessary elements from the HTML
+const audio = document.getElementById("myAudio");
+const source = document.getElementById("source-audio");
+const musicTitle = document.querySelector(".musictitle");
+const playBtn = document.getElementById("btn-faws-play-pause");
+const iconPlay = document.getElementById("icon-play");
+const iconPause = document.getElementById("icon-pause");
+const muteBtn = document.getElementById("toggleMute");
+const iconVolUp = document.getElementById("icon-vol-up");
+const iconVolMute = document.getElementById("icon-vol-mute");
+const timer = document.querySelector(".timer");
+const barProgress = document.getElementById("myBar");
+
+// 타임라인
+function onTimeUpdate() {
+  const currentTime = audio.currentTime;
+  timer.innerHTML = getMinutes(currentTime);
+  setBarProgress();
+  
+  if (audio.ended) {
+    document.querySelector('#icon-play').style.display = 'block';
+    document.querySelector('#icon-pause').style.display = 'none';
+    pauseToPlay(indexAudio);
+    if (indexAudio < listAudio.length - 1) {
+      const index = parseInt(indexAudio) + 1;
+      loadNewTrack(index);
+    }
+  }
+}
+
+function setBarProgress() {
+  const progress = (audio.currentTime / audio.duration) * 100;
+  barProgress.style.width = progress + "%";
+}
+
+const progressbar = document.querySelector('#myProgress');
+progressbar.addEventListener("click", seek);
+
+function seek(event) {
+  const width = progressbar.offsetWidth;
+  const clickX = event.offsetX;
+  const duration = audio.duration;
+  const seekTime = (clickX / width) * duration;
+  audio.currentTime = seekTime;
+  setBarProgress();
+}
+
+// Update the progress bar as the audio plays
+audio.addEventListener("timeupdate", function() {
+  setBarProgress();
+});
+
+// Define the playlist
+const playlist = [
+  {
+    title: "Song 1",
+    src: "https://blog.kakaocdn.net/dn/SleZv/btr3XzlQf35/IZw6aMnwVoSyn00GOpyRa0/Laurence%2C%20the%20First%20Vicar.mp3?attach=1&knm=tfile.mp3"
+  },
+  {
+    title: "Song 2",
+    src: "https://blog.kakaocdn.net/dn/bzfm9K/btr36GcCB9S/XH6tsraumP9BLwW8G4RrKk/Ornstein%20%26amp%3B%20Smough.mp3?attach=1&knm=tfile.mp3"
+  },
+  {
+    title: "Song 3",
+    src: "https://blog.kakaocdn.net/dn/dobsfd/btr4bk7DbP7/RHzUy314glhAqcZfYQrjGk/Nameless%20King.mp3?attach=1&knm=tfile.mp3"
+  }
+];
+let isPlaying = false;
+let isMuted = false;
+
+// Initialize the current track index and current time from localStorage, if available
+let currentTrackIndex = localStorage.getItem("audioPlayerCurrentTrackIndex")
+  ? parseInt(localStorage.getItem("audioPlayerCurrentTrackIndex"))
+  : 0;
+let currentTime = localStorage.getItem("audioPlayerCurrentTime")
+  ? parseFloat(localStorage.getItem("audioPlayerCurrentTime"))
+  : 0;
+
+// Load the current track
+function loadTrack() {
+  const track = playlist[currentTrackIndex];
+  source.setAttribute("src", track.src);
+  audio.load();
+  musicTitle.textContent = track.title;
+  audio.currentTime = Math.max(0, currentTime - 0.3);
+  playAudio();
+}
+
+
+// Autoplay the audio when the page is loaded and the user interacts with the page
+document.addEventListener("click", playAudio);
+document.addEventListener("scroll", playAudio);
+
+function playAudio() {
+  if (audio.paused) {
+    audio.play();
+    document.removeEventListener("click", playAudio);
+    document.removeEventListener("scroll", playAudio);
+    iconPlay.style.display = "none";
+    iconPause.style.display = "inline-block";
+    isPlaying = true;
+  }
+  playBtn.classList.add("active");
+}
+
+// Pause the audio
+function pauseAudio() {
+  audio.pause();
+  isPlaying = false;
+  playBtn.classList.remove("active");
+  iconPause.style.display = "none";
+  iconPlay.style.display = "inline-block";
+}
+
+// Toggle play/pause
+function toggleAudio() {
+  if (isPlaying) {
+    pauseAudio();
+  } else {
+    playAudio();
+  }
+}
+
+// Go to next track
+function next() {
+  currentTrackIndex++;
+  if (currentTrackIndex >= playlist.length) {
+    currentTrackIndex = 0;
+  }
+  loadTrack();
+  playAudio();
+}
+
+// Go to previous track
+function previous() {
+  currentTrackIndex--;
+  if (currentTrackIndex < 0) {
+    currentTrackIndex = playlist.length - 1;
+  }
+  loadTrack();
+  playAudio();
+}
+
+// Toggle mute/unmute
+function toggleMute() {
+  if (isMuted) {
+    audio.muted = false;
+    isMuted = false;
+    muteBtn.classList.remove("active");
+    iconVolMute.style.display = "none";
+    iconVolUp.style.display = "inline-block";
+  } else {
+    audio.muted = true;
+    isMuted = true;
+    muteBtn.classList.add("active");
+    iconVolUp.style.display = "none";
+    iconVolMute.style.display = "inline-block";
+  }
+}
+
+// Load the first track
+loadTrack();
+
+// Set the current time of the audio
+audio.currentTime = currentTime;
+
+// Play the audio
+playAudio();
+
+// Add event listeners to save the current track index and current time to localStorage
+audio.addEventListener("timeupdate", function() {
+  currentTime = audio.currentTime;
+  localStorage.setItem("audioPlayerCurrentTime", currentTime);
+});
+
+window.addEventListener("beforeunload", function() {
+  localStorage.setItem("audioPlayerCurrentTrackIndex", currentTrackIndex);
+  localStorage.setItem("audioPlayerCurrentTime", currentTime);
+});
+
+
+</script>
+	<!-- 음악 플레이어 --> 
+		</s_t3>
+		<script>
+			//부분 목록
+			var ptn = window.location.pathname;
+			if(ptn == '/category/text' || ptn =='/category/gallery/sub-text'|| ptn =='/category/text/sub-text2'){
+				$(".list_wrap").attr("id","lst_web");}
+
+
+			// 노이미지
+			$(function(){
+				$(".thumb-link").not(":has(.thumb-img)").prepend("<span class=thumb-img><img src=//i1.daumcdn.net/thumb/C200x200/?fname=./images/noimg.jpg></span>");
+			});
+
+			// 탑버튼 
+			$(document).ready(function(){
+				$(".top").hide();
+				$(function () {
+					$(window).scroll(function () {
+						if ($(this).scrollTop() > 100) {
+							$('.top').fadeIn();
+						} else {
+							$('.top').fadeOut();
+						}
+					});
+					$('.top').click(function () {
+						$('body,html').animate({
+							scrollTop: 0
+						}, 400);
+						return false;
+					});
+				});
+			});
+
+		</script>
+	</body>
+</html>
