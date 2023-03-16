@@ -398,6 +398,7 @@ function loadTrack() {
 // Autoplay the audio when the page is loaded and the user interacts with the page
 document.addEventListener("click", playAudio);
 document.addEventListener("scroll", playAudio);
+window.addEventListener("scroll", scrollToPlay);
 
 function playAudio() {
   if (audio.paused) {
